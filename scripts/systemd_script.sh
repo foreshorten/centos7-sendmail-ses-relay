@@ -25,9 +25,9 @@ emailcfg()
      systemctl start rc-local
      systemctl restart sendmail
      systemctl start saslauthd
-     #exec printf 'Subject: Test\nFrom: your.name@emailtest.com\nTo: your.name@emailtest.com\n' | sendmail -i -t -f your.name@emailtest.com your.name@emailtest.com
-    #     echo "Subject: sendmail test" | sendmail -v root@localhost
-    # exit 0
+     # Use the following to test, BUT I recommend remove it before upload to ECR or Docker Hub
+     # exec printf 'Subject: Test\nFrom: your.name@emailtest.com\nTo: your.name@emailtest.com\n' | sendmail -i -t -f your.name@emailtest.com your.name@emailtest.com
+     # exit 0
  }
 
 #startsystemd
