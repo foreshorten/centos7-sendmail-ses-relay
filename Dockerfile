@@ -5,7 +5,7 @@ LABEL maintainer="foreshorten.net@gmail.com"
 ENV SENDMAIL_USER <SES_IAM_USER>
 ENV SENDMAIL_PASS <SES_IAM_PASS>
 
-COPY scripts/systemd_script.sh /root/
+COPY scripts/*.sh /root/
 
 #adding hostname so sendmail wont delay install (Note: not using postfix due to ipv6 init)
 RUN echo 127.0.0.1 localhost localhost.localdomain $(hostname) >> /etc/hosts && \
