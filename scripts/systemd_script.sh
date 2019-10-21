@@ -7,9 +7,9 @@ emailcfg()
 
 taskscript()
      {
+     #PLACE your script below OR use the taskscript.sh file.  
+     #NOTE: If you use your own scrpt, recommend having a 'sleep 3' at beginning (see the taskscript.sh) which allows time for IAM credentials to be loaded in /etc/mail/auth file
      setsid bash /root/taskscript.sh &
-     systemctl status sendmail
-
      }
 
 emailcfg

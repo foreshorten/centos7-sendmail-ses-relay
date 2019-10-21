@@ -2,6 +2,8 @@
 
 sleep 3
 
+systemctl status sendmail
+systemctl status saslauthd
      # Use the following to test, BUT I recommend remove it before upload to ECR or Docker Hub
      # exec printf 'Subject: Test\nFrom: your.name@emailtest.com\nTo: your.name@emailtest.com\n' | sendmail -i -t -f your.name@emailtest.com your.name@emailtest.com
 
