@@ -1,18 +1,16 @@
 FROM centos/systemd
 
-LABEL maintainer="foreshorten.net@gmail.com"
-
 ENV SENDMAIL_USER <SES_IAM_USER>
 ENV SENDMAIL_PASS <SES_IAM_PASS>
 
 COPY scripts/*.sh /root/
 
-#adding hostname so sendmail wont delay install (Note: not using postfix due to ipv6 init)
+#Adding hostname so sendmail wont delay install
 RUN echo 127.0.0.1 localhost localhost.localdomain $(hostname) >> /etc/hosts && \
 yum install -y deltarpm sendmail sendmail-cf file poppler-utils cyrus-sasl-plain
 
-#add relay config to sendmail.mc
-#Taken from https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-sendmail.html   --  ty Amazon :)
+#Adding relay config to sendmail.mc
+#Config below is from https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-sendmail.html --  ty Amazon :)
 RUN sed -i -e 's/smtp.your.provider/email-smtp.us-west-2.amazonaws.com/g' /etc/mail/sendmail.mc && \
 sed -i -e '/lan)dnl/ a define(`RELAY_MAILER_ARGS'\'', `TCP $h 25'\'')dnl' /etc/mail/sendmail.mc && \
 sed -i -e '/lan)dnl/ a define(`confAUTH_MECHANISMS'\'', `LOGIN PLAIN'\'')dnl' /etc/mail/sendmail.mc && \
