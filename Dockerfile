@@ -11,9 +11,6 @@ COPY scripts/*.sh /root/
 RUN echo 127.0.0.1 localhost localhost.localdomain $(hostname) >> /etc/hosts && \
 yum install -y deltarpm sendmail sendmail-cf file poppler-utils cyrus-sasl-plain
 
-RUN echo "Connect:email-smtp.us-west-2.amazonaws.com RELAY" >> /etc/mail/access && \
-chmod +x /etc/rc.d/rc.local
-
 #add relay config to sendmail.mc
 #Taken from https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-sendmail.html   --  ty Amazon :)
 RUN sed -i -e 's/smtp.your.provider/email-smtp.us-west-2.amazonaws.com/g' /etc/mail/sendmail.mc && \
@@ -27,6 +24,8 @@ sed -i -e '/lan)dnl/ a define(`SMART_HOST'\'', `email-smtp.us-west-2.amazonaws.c
 chmod 666 /etc/mail/sendmail.cf  && \
 m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf &&\
 chmod 644 /etc/mail/sendmail.cf
+
+RUN yum update -y
 
 VOLUME [ "/sys/fs/cgroup" ]
 
