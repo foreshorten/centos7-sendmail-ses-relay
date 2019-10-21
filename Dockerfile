@@ -25,6 +25,8 @@ chmod 644 /etc/mail/sendmail.cf
 
 RUN yum update -y
 
+EXPOSE 25
+
 VOLUME [ "/sys/fs/cgroup" ]
 
 CMD ["/root/systemd_script.sh"]
