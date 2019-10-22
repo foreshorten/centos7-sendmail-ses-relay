@@ -11,7 +11,8 @@ The following are required Docker variables (-e):
 | `SENDMAIL_PASS` | Amazon SES SMTP password |
 | `SEND_DOMAIN` | Domain you send from |
 | `SMTP_ENDPOINT` | [Amazon SES SMTP endpoints](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/smtp-connect.html) |
-( How to obtain your [Amazon SES SMTP credentials](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/smtp-credentials.html) )
+
+Documentation for how to obtain your [Amazon SES SMTP credentials](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/smtp-credentials.html)
 
 **Example:**
 
