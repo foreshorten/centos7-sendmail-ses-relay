@@ -3,7 +3,7 @@ FROM centos/systemd
 ENV SENDMAIL_USER <SMTP_IAM_USER>
 ENV SENDMAIL_PASS <SMTP_IAM_PASS>
 ENV SEND_DOMAIN   example.com
-ENV SMTP_ENDPOINT  email-smtp.us-west-2.amazonaws.com
+ENV SMTP_ENDPOINT email-smtp.us-west-2.amazonaws.com
 
 COPY scripts/*.sh /root/
 
@@ -12,7 +12,7 @@ RUN echo 127.0.0.1 localhost localhost.localdomain $(hostname) >> /etc/hosts && 
 yum install -y deltarpm sendmail sendmail-cf file poppler-utils cyrus-sasl-plain
 
 #Adding relay config to sendmail.mc
-#Config below is from https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-sendmail.html --  ty Amazon :)
+#Config below is from https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-sendmail.html -- ty Amazon :)
 RUN sed -i -e '/lan)dnl/ a define(`RELAY_MAILER_ARGS'\'', `TCP $h 25'\'')dnl' /etc/mail/sendmail.mc && \
 sed -i -e '/lan)dnl/ a define(`confAUTH_MECHANISMS'\'', `LOGIN PLAIN'\'')dnl' /etc/mail/sendmail.mc && \
 sed -i -e '/lan)dnl/ a FEATURE(`authinfo'\'', `hash -o /etc/mail/authinfo.db'\'')dnl' /etc/mail/sendmail.mc && \

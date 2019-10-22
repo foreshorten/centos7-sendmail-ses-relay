@@ -13,5 +13,4 @@ sleep 2
      systemctl enable sendmail
      systemctl enable saslauthd
 
-
 exit 0

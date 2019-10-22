@@ -1,7 +1,7 @@
 # Amazon Simple Email Service (Amazon SES) - Centos7 Sendmail SES SMTP Relay
 This is a CentOS7 systemd image with email **SMTP Relay** capabilities to send outbound through AWS SES.  This image has sendmail installed and is configured as an smtp relay to send emails out through amazon SES host (sendmail SMART_HOST).  This Dockerfile is currently only configured for us-west2 region. 
 
-This Docker image was originally created to be a _Parent Image_ for subsequent Docker images.  It can be run as a Service or Task in Amazon Elastic Container Service (Amazon ECS).    The ECS Task Definition can only be run on **EC2 but not Fargate**, because this image depends on systemd to run sendmail and saslauthd. 
+This Docker image was originally created to be a _Parent Image_ for subsequent Docker images.  It can be run as a Service or Task in Amazon Elastic Container Service (Amazon ECS).  The ECS Task Definition can only be run on **EC2 but not Fargate**, because this image depends on systemd to run sendmail and saslauthd. 
 
 The following are required Docker variables (-e):
 
