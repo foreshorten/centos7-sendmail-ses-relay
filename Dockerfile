@@ -5,7 +5,7 @@ ENV SENDMAIL_PASS <SES_IAM_PASS>
 ENV SEND_DOMAIN   example.com
 ENV SMTP_ENDPOINT email-smtp.us-west-2.amazonaws.com
 
-COPY scripts/*.bash /root/
+COPY scripts/*.sh /root/
 
 #adding hostname so sendmail wont delay install (Note: not using postfix due to ipv6 init)
 RUN echo 127.0.0.1 localhost localhost.localdomain $(hostname) >> /etc/hosts && \
@@ -27,6 +27,6 @@ chmod 644 /etc/mail/sendmail.cf
 
 EXPOSE 25
 
-VOLUME [ "/sys/fs/cgroup" ]
+VOLUME ["/sys/fs/cgroup"]
 
-CMD ["/root/systemd_script.bash"]
+CMD ["/root/systemd_script.sh"]
