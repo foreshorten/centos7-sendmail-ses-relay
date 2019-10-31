@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#This should stay here to delay task enough for systemd to finish starting
 sleep 3
 
 # Use the following to test, BUT I recommend remove it before upload to ECR or Docker Hub
@@ -11,5 +12,3 @@ sleep 3
 
 ##This will show you details if your email fails
 systemctl status sendmail -l
-
-exit 0
