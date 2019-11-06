@@ -14,11 +14,19 @@ The following are required Docker variables (-e):
 
 Documentation for how to obtain your [Amazon SES SMTP credentials](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/smtp-credentials.html)
 
-**Example:**
+**Example docker run with smtp endpoint US West (Oregon) - *The Default*:**
 
-    docker run --rm -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run -e SENDMAIL_USER=<SMTP_IAM_USER> -e SENDMAIL_PASS=<SMTP_IAM_PASS> -e SEND_DOMAIN=<yourdomain.com> foreshorten/centos7-sendmail-ses-relay
-**** Added the --rm to [Automatically remove the container when it exits](https://docs.docker.com/engine/reference/commandline/run/)
+    docker run --rm -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run -e SENDMAIL_USER='<SMTP_IAM_USER>' -e SENDMAIL_PASS='<SMTP_IAM_PASS>' -e SEND_DOMAIN='<yourdomain.com>' foreshorten/centos7-sendmail-ses-relay
+> **Note:** Adding the --rm to [Automatically remove the container when it exits](https://docs.docker.com/engine/reference/commandline/run/)
+
+**Example docker run with smtp endpoint US East (N. Virginia) - email-smtp.us-east-1.amazonaws.com:**
+
+    docker run --rm -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run -e SENDMAIL_USER='<SMTP_IAM_USER>' -e SENDMAIL_PASS='<SMTP_IAM_PASS>' -e SEND_DOMAIN='<yourdomain.com>' -e SMTP_ENDPOINT='email-smtp.us-east-1.amazonaws.com' foreshorten/centos7-sendmail-ses-relay
+
+**Example sendmail by cli to test:**
+
+       printf 'Subject: Test\nFrom: yourname@example.com\nTo: yourname@example.com\n' | sendmail -i -t -f yourname@example.com yourname@example.com
 
 NOTE: When sending emails the "From:" email must be verified before sending emails out.** [Amazon SES requires that you verify your _identities_ (the domains or email addresses that you send email from) to confirm that you own them, and to prevent unauthorized use.](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html?icmpid=docs_ses_console)
 
-I have added EXPOSE 25 to Dockerfile in the case it's needed.  However, it is recommended to only expose this port if needed.   Also, this image is intended to be used on internal networks only. 
+I have added EXPOSE 25 to Dockerfile, however it is receommended to only run with this port open if needed.   This image is intended to be used on internal networks only. 
